@@ -244,8 +244,8 @@ This library uses a triple-license structure:
 - **Boost Software License 1.0** — Cloak.h-derived utility macros
 
 As most compilers don't require the pure C99 implementation, you may remove all
-Apache code from this header and therefore remove all attribution requirements
-from any compiled binary made using this header library.
+Apache code from this header and therefore remove the attribution requirements
+from any compiled binary which stem from the use of this library.
 
 See the [LICENSES](LICENSES/) directory for full license texts.
 
