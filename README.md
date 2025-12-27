@@ -37,7 +37,7 @@ This is equivalent to the C23 syntax:
    ```c
    #include "va_opt.h"
    ```
-3. Use `VA_OPT((args), expansion)` in your macros
+3. Use `VA_OPT((__VA_ARGS__), expansion)` in your macros
 
 The library automatically detects and uses the best available implementation for
 your compiler.
@@ -175,7 +175,7 @@ specific implementation:
 compile  
 *2 - Must use `/Zc:preprocessor`  
 *3 - Must not use `/Zc:preprocessor`  
-*4 - May avoid warnings if using `/Zc:preprocessor`
+*4 - May avoid warnings if using `/Zc:preprocessor`  
 *5 - Default impl selection depends on compiler settings.
 
 ## C99 Polyfill Limitations
