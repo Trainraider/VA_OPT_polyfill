@@ -156,27 +156,21 @@ specific implementation:
 | Compiler Warnings:        | ℹ️ |
 | Default auto selected impl| ⭐ |
 
-| CC                     | Native | GNU | MSVC | C99 |
-| ---------------------- | ------ | --- | ---- | --- |
-| x86-64 gcc 15.2        | ⭐✅   | ✅  |❌    |✅   |
-| x86-64 gcc 3.4.6       | ❌     | ⭐✅|❌    |✅   |
-| x86-64 clang 21.1.0    | ⭐✅   | ✅  |❌    |✅   |
-| x86-64 clang 3.4.1     | ❌     | ⭐✅|❌    |✅   |
-| x64 msvc v19.44 VS17.14| ⭐✅\*1*5| ✅*2|✅*3|✅*4 |
-| x64 msvc v19.20 VS16.0 | ❌     | ⚠️  |⭐✅  |✅ℹ️ |
-| x86 nvc 25.11          | ⭐✅   | ✅  |❌    |✅   |
-| x86-64 icc 2021.10.0   | ❌     | ⭐✅|❌    |✅   |
-| x86_64 CompCert 3.12   | ⭐✅   | ⚠️  |❌    |✅   |
-| TCC 0.9.27             | ❌     | ⚠️  |❌    |⭐✅ |
-| SDCC 4.5.0             | ⭐✅ℹ️ | ⚠️ℹ️|❌    | ✅ℹ️|
-
-#### Footnotes:  
-*1 - Must specify any C standard OR `/Zc:preprocessor` or else it does not
-compile  
-*2 - Must use `/Zc:preprocessor`  
-*3 - Must not use `/Zc:preprocessor`  
-*4 - May avoid warnings if using `/Zc:preprocessor`  
-*5 - Default impl selection depends on compiler settings.
+| CC                       | Native | GNU  | MSVC | C99  |
+| ------------------------ | ------ | ---- | ---- | ---- |
+| GCC 15.2                 | ⭐✅   | ✅   | ❌   | ✅   |
+| GCC 15.2 (-std=c99)      | ⭐✅   | ⚠️   | ❌   | ✅   |
+| GCC 3.4.6                | ❌     | ⭐✅ | ❌   | ✅   |
+| Clang 21.1.0             | ⭐✅   | ✅   | ❌   | ✅   |
+| Clang 3.4.1              | ❌     | ⭐✅ | ❌   | ✅   |
+| MSVC v19.44 (Conformant) | ⭐✅   | ✅   | ❌   | ✅   |
+| MSVC v19.44              | ❌     | ⚠️   | ⭐✅ | ✅ℹ️ |
+| MSVC v19.20              | ❌     | ⚠️   | ⭐✅ | ✅ℹ️ |
+| NVC 25.11                | ⭐✅   | ✅   | ❌   | ✅   |
+| ICC 2021.10.0            | ❌     | ⭐✅ | ❌   | ✅   |
+| CompCert 3.12            | ⭐✅   | ⚠️   | ❌   | ✅   |
+| TCC 0.9.27               | ❌     | ⚠️   | ❌   | ⭐✅ |
+| SDCC 4.5.0               | ⭐✅   | ⚠️   | ❌   | ✅   |
 
 ## C99 Polyfill Limitations
 
@@ -213,8 +207,7 @@ cc -x c -DVA_OPT_USE_NATIVE -DTEST_VA_OPT va_opt.h -o va_opt_test && ./va_opt_te
 
 For MSVC:
 Ensure TEST_VA_OPT and/or VA_OPT_USE_MSVC are defined and the header is treated
-as a .c file. Review the compiler compatibility table's footnotes for additional
-MSVC compiler flags for different implementation selections.
+as a .c file. Review the compiler compatibility table above to see which modes require conformance mode via the `/Zc:preprocessor` option.
 
 ## Technical Details
 
