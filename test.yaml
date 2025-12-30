@@ -1,106 +1,95 @@
 compilers:
   - api_name: cg152
     display_name: GCC 15.2
-    nickname: gcc152
-    extra_flags: ["-E"]
+    nickname: gcc
   
   - api_name: cg152
     display_name: GCC 15.2 (-std=c99)
-    nickname: gcc152c99
-    extra_flags: ["-E", "-std=c99"]
+    nickname: gcc99
+    extra_flags: ["-std=c99"]
 
   - api_name: cg346
     display_name: GCC 3.4.6
-    nickname: gcc346
-    extra_flags: ["-E"]
+    nickname: gcc3
+    local_asm: true
   
   - api_name: cclang2110
     display_name: Clang 21.1.0
-    nickname: clang2110
-    extra_flags: ["-E", "-Wno-unused-command-line-argument"]
+    nickname: clang
 
   - api_name: cclang341
     display_name: Clang 3.4.1
-    nickname: clang341
-    extra_flags: ["-E", "-Wno-unused-command-line-argument"]
+    nickname: clang3
 
   - api_name: vc_v19_44_VS17_14_x64
     display_name: MSVC v19.44 (Conformant)
-    nickname: msvc1944c
-    extra_flags: ["/E", "/Zc:preprocessor"]
+    nickname: msvcc
+    extra_flags: ["/Zc:preprocessor"]
   
   - api_name: vc_v19_44_VS17_14_x64
     display_name: MSVC v19.44
-    nickname: msvc1944
-    extra_flags: ["/E"]
+    nickname: msvc
 
   - api_name: vc_v19_20_VS16_0_x64
     display_name: MSVC v19.20
-    nickname: msvc1920
-    extra_flags: ["/E"]
+    nickname: msvcold
 
   - api_name: nvc_x86_25_11
     display_name: NVC 25.11
     nickname: nvc
-    extra_flags: ["-E"]
 
   - api_name: cicc2021100
     display_name: ICC 2021.10.0
     nickname: icc
-    extra_flags: ["-EP"]
 
   - api_name: ccx8632_312
     display_name: CompCert 3.12
     nickname: compcert
-    extra_flags: ["-E"]
+    local_compile: true
 
   - api_name: tinycc0927
     display_name: TCC 0.9.27
     nickname: tcc
-    extra_flags: ["-E"]
+    local_compile: true
 
   - api_name: sdcc450
     display_name: SDCC 4.5.0
     nickname: sdcc
-    extra_flags: ["-E"]
+    # These are silly warnings about the optimizer optimizing things away
+    extra_flags: ["--disable-warning 110 --disable-warning 126"]
+    local_compile: true
 
 tests:
-  - group: impl
+  - group: VA_OPT
     detect_macro: NTRNLVA_IMPL
+    file_name: va_opt.h
+    prepend_lines:
+      - "#define TEST_VA_OPT"
     variants:
-      - test_name: impl_auto
-        variant: auto
-        display_name: Auto
+      - variant: auto
         auto: true
         include_in_table: false
-        file_name: va_opt.h
-        prepend_lines: ["#define TEST_VA_OPT"]
-        detect_value: null
 
-      - test_name: impl_native
-        variant: native
+      - variant: native
         display_name: Native
-        file_name: va_opt.h
-        prepend_lines: ["#define TEST_VA_OPT", "#define VA_OPT_USE_NATIVE"]
         detect_value: 1
+        prepend_lines:
+          - "#define VA_OPT_USE_NATIVE"
 
-      - test_name: impl_gnu
-        variant: gnu
+      - variant: gnu
         display_name: GNU
-        file_name: va_opt.h
-        prepend_lines: ["#define TEST_VA_OPT", "#define VA_OPT_USE_GNU"]
         detect_value: 2
+        prepend_lines:
+          - "#define VA_OPT_USE_GNU"
 
-      - test_name: impl_msvc
-        variant: msvc
+      - variant: msvc
         display_name: MSVC
-        file_name: va_opt.h
-        prepend_lines: ["#define TEST_VA_OPT", "#define VA_OPT_USE_MSVC"]
         detect_value: 3
+        prepend_lines:
+          - "#define VA_OPT_USE_MSVC"
 
-      - test_name: impl_c99
-        variant: c99
+      - variant: c99
         display_name: C99
-        file_name: va_opt.h
-        prepend_lines: ["#define TEST_VA_OPT", "#define VA_OPT_USE_C99"]
         detect_value: 4
+        prepend_lines:
+          - "#define VA_OPT_USE_C99"

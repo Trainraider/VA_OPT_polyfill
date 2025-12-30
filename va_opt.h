@@ -364,7 +364,7 @@ argument in the list passed to VA_OPT or VA_ISEMPTY */
     }                                                                          \
   } while (0)
 
-int main() {
+int main(void) {
 #if NTRNLVA_IMPL == NTRNLVA_IMPL_NATIVE
   printf("Testing with native __VA_OPT__ support\n");
 #elif NTRNLVA_IMPL == NTRNLVA_IMPL_GNU

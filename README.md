@@ -156,21 +156,24 @@ specific implementation:
 | Compiler Warnings:        | ℹ️ |
 | Default auto selected impl| ⭐ |
 
-| CC                       | Native | GNU  | MSVC | C99  |
-| ------------------------ | ------ | ---- | ---- | ---- |
-| GCC 15.2                 | ⭐✅   | ✅   | ❌   | ✅   |
-| GCC 15.2 (-std=c99)      | ⭐✅   | ⚠️   | ❌   | ✅   |
-| GCC 3.4.6                | ❌     | ⭐✅ | ❌   | ✅   |
-| Clang 21.1.0             | ⭐✅   | ✅   | ❌   | ✅   |
-| Clang 3.4.1              | ❌     | ⭐✅ | ❌   | ✅   |
-| MSVC v19.44 (Conformant) | ⭐✅   | ✅   | ❌   | ✅   |
-| MSVC v19.44              | ❌     | ⚠️   | ⭐✅ | ✅ℹ️ |
-| MSVC v19.20              | ❌     | ⚠️   | ⭐✅ | ✅ℹ️ |
-| NVC 25.11                | ⭐✅   | ✅   | ❌   | ✅   |
-| ICC 2021.10.0            | ❌     | ⭐✅ | ❌   | ✅   |
-| CompCert 3.12            | ⭐✅   | ⚠️   | ❌   | ✅   |
-| TCC 0.9.27               | ❌     | ⚠️   | ❌   | ⭐✅ |
-| SDCC 4.5.0               | ⭐✅   | ⚠️   | ❌   | ✅   |
+| CC                       | Native | GNU  | MSVC | C99   |
+| ------------------------ | ------ | ---- | ---- | ----- |
+| GCC 15.2                 | ⭐✅   | ✅   | ❌   | ✅    |
+| GCC 15.2 (-std=c99)      | ⭐✅   | ⚠️  | ❌   | ✅    |
+| GCC 3.4.6*               | ❌     | ⭐✅ | ❌   | ✅    |
+| Clang 21.1.0             | ⭐✅   | ✅   | ❌   | ✅    |
+| Clang 3.4.1              | ❌     | ⭐✅ | ❌   | ✅    |
+| MSVC v19.44 (Conformant) | ⭐✅   | ✅   | ❌   | ✅    |
+| MSVC v19.44              | ❌     | ⚠️  | ⭐✅ | ✅ℹ️ |
+| MSVC v19.20              | ❌     | ⚠️  | ⭐✅ | ✅ℹ️ |
+| NVC 25.11                | ⭐✅   | ✅   | ❌   | ✅    |
+| ICC 2021.10.0            | ❌     | ⭐✅ | ❌   | ✅    |
+| CompCert 3.12**          | ⭐✅   | ⚠️  | ❌   | ✅    |
+| TCC 0.9.27**             | ❌     | ⚠️  | ❌   | ⭐✅  |
+| SDCC 4.5.0**             | ⭐✅   | ⚠️  | ❌   | ✅    |
+
+\* This compiler outputted assembly which was then assembled and run locally with gcc 15.2.1.  
+\** This compiler was only used for preprocessing and then the result was compiled locally with gcc 15.2.1.
 
 ## C99 Polyfill Limitations
 

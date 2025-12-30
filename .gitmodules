@@ -1,0 +1,3 @@
+[submodule "godbolt-tester"]
+	path = godbolt-tester
+	url = git@github.com:Trainraider/godbolt-tester.git
