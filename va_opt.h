@@ -75,20 +75,6 @@ IMPLEMENTATION NOTES:
 #define NTRNLVA_IMPL_MSVC   3
 #define NTRNLVA_IMPL_C99    4
 
-/* Detect __VA_OPT__ support */
-#define NTRNLVA_EXPAND(...) __VA_ARGS__
-#define NTRNLVA_SEL3_I(a, b, c, ...) c
-#define NTRNLVA_SEL3(...) NTRNLVA_EXPAND(NTRNLVA_SEL3_I(__VA_ARGS__))
-#define NTRNLVA_OPT_SUPPORTED_I(...) NTRNLVA_SEL3(__VA_OPT__(, ), 1, 0, )
-#ifndef VA_OPT_SUPPORTED
-#ifdef __PCC__
-#define VA_OPT_SUPPORTED 0
-#endif
-#endif
-#ifndef VA_OPT_SUPPORTED
-#define VA_OPT_SUPPORTED NTRNLVA_OPT_SUPPORTED_I(?)
-#endif
-
 /* Select implementation */
 #ifdef VA_OPT_USE_NATIVE
     #define NTRNLVA_IMPL NTRNLVA_IMPL_NATIVE
@@ -100,8 +86,18 @@ IMPLEMENTATION NOTES:
     #define NTRNLVA_IMPL NTRNLVA_IMPL_C99
 #endif
 
+#define NTRNLVA_EXPAND(...) __VA_ARGS__
+#define NTRNLVA_SEL3_I(a, b, c, ...) c
+#define NTRNLVA_SEL3(...) NTRNLVA_EXPAND(NTRNLVA_SEL3_I(__VA_ARGS__))
+
 #ifndef NTRNLVA_IMPL 
 /* Auto-select implementation */
+/* Detect __VA_OPT__ support */
+#define NTRNLVA_OPT_SUPPORTED_I(...) NTRNLVA_SEL3(__VA_OPT__(, ), 1, 0, )
+#ifndef VA_OPT_SUPPORTED
+#define VA_OPT_SUPPORTED NTRNLVA_OPT_SUPPORTED_I(?)
+#endif
+
 #if VA_OPT_SUPPORTED
     #define NTRNLVA_IMPL NTRNLVA_IMPL_NATIVE
 
